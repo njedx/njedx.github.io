@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title>For You</title>
 
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
 body{
     margin:0;
@@ -13,10 +16,10 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Arial;
+    font-family:'Poppins', sans-serif;
 }
 
-/* ===== MICKEY ===== */
+
 .mickey{
     position:relative;
     width:160px;
@@ -26,7 +29,7 @@ body{
     animation:appear 2.5s ease forwards;
 }
 
-/* glow effect */
+
 .mickey::after{
     content:"";
     position:absolute;
@@ -38,7 +41,7 @@ body{
     animation:glow 3s ease forwards 1.5s;
 }
 
-/* ears */
+
 .ear{
     position:absolute;
     width:80px;
@@ -50,7 +53,7 @@ body{
 .left{ top:-35px; left:-35px; }
 .right{ top:-35px; right:-35px; }
 
-/* face */
+
 .face{
     width:160px;
     height:160px;
@@ -59,7 +62,7 @@ body{
     position:absolute;
 }
 
-/* ===== ANIMATIONS ===== */
+
 @keyframes appear{
     0%{
         opacity:0;
@@ -77,24 +80,27 @@ body{
     }
 }
 
+
 @keyframes glow{
     0%{ opacity:0; }
     100%{ opacity:1; }
 }
 
-/* ===== TEXT ===== */
+
 .text{
     position:absolute;
-    bottom:40px;
-    width:80%;
+    bottom:120px; /* مرتفع شوي */
+    width:85%;
     color:white;
     text-align:center;
-    font-size:16px;
-    line-height:1.6;
+    font-size:22px;
+    line-height:1.8;
     opacity:0;
+    font-weight:400;
     animation:textIn 3s ease forwards 2s;
-    text-shadow:0 0 10px rgba(255,255,255,0.3);
+    text-shadow:0 0 12px rgba(255,255,255,0.35);
 }
+
 
 @keyframes textIn{
     from{
@@ -111,11 +117,13 @@ body{
 
 <body>
 
+
 <div class="mickey">
     <div class="ear left"></div>
     <div class="ear right"></div>
     <div class="face"></div>
 </div>
+
 
 <div class="text">
 This page was built just to say: you’re truly one of a kind.<br><br>
