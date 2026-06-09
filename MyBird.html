@@ -2,80 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pixel Heart</title>
+<title>Love</title>
 
 <style>
 body{
     margin:0;
+    overflow:hidden;
+    background:#000;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    background: radial-gradient(circle,#1a1a2e,#000);
     font-family:Arial;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns: repeat(14, 18px);
-    grid-template-rows: repeat(14, 18px);
-    gap:2px;
+
+.heart{
+    position:relative;
+    width:140px;
+    height:140px;
+    background:#ffb6c1; /* baby pink */
+    transform:rotate(-45deg);
+    animation:beat 1.2s infinite, glow 1.5s infinite;
+    box-shadow:0 0 20px #ffb6c1;
 }
 
 
-.cell{
-    width:18px;
-    height:18px;
-    background:#111;
-    transition:0.3s;
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:#ffb6c1;
 }
 
-.red{
-    background: linear-gradient(135deg,#ff1744,#ff8a80);
-    box-shadow:0 0 6px #ff1744;
+.heart::before{ top:-70px; left:0; }
+.heart::after{ left:70px; top:0; }
+
+@keyframes beat{
+    0%,100%{ transform:rotate(-45deg) scale(1); }
+    50%{ transform:rotate(-45deg) scale(1.15); }
 }
 
-/* النص */
+@keyframes glow{
+    0%,100%{ box-shadow:0 0 15px #ffb6c1; }
+    50%{ box-shadow:0 0 40px #ffb6c1; }
+}
+
+
+.fall{
+    position:absolute;
+    top:-10px;
+    color:#ffb6c1;
+    font-size:18px;
+    animation:drop linear infinite;
+    opacity:0.8;
+}
+
+@keyframes drop{
+    from{
+        transform:translateY(-10vh);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+
 .text{
     position:absolute;
     color:white;
-    font-weight:bold;
-    text-shadow:0 0 10px #fff;
-    font-size:20px;
+    margin-top:200px;
+    font-size:18px;
+    text-shadow:0 0 10px #ffb6c1;
 }
 </style>
 </head>
 
 <body>
 
-<div class="text">I LOVE YOU ❤️</div>
-
-<div class="grid" id="grid"></div>
+<div class="heart"></div>
+<div class="text">I LOVE YOU 💖</div>
 
 <script>
-const pattern = [
- [0,1,1,0,0,0,0,0,0,1,1,0,0,0],
- [1,1,1,1,0,0,0,0,1,1,1,1,0,0],
- [1,1,1,1,1,0,0,1,1,1,1,1,1,0],
- [1,1,1,1,1,1,1,1,1,1,1,1,1,0],
- [0,1,1,1,1,1,1,1,1,1,1,1,0,0],
- [0,0,1,1,1,1,1,1,1,1,1,0,0,0],
- [0,0,0,1,1,1,1,1,1,1,0,0,0,0],
- [0,0,0,0,1,1,1,1,1,0,0,0,0,0],
- [0,0,0,0,0,1,1,1,0,0,0,0,0,0],
- [0,0,0,0,0,0,1,0,0,0,0,0,0,0],
-];
+for(let i=0;i<60;i++){
+    let heart = document.createElement("div");
+    heart.className = "fall";
+    heart.innerHTML = "💗";
 
-const grid = document.getElementById("grid");
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (Math.random()*20+10) + "px";
+    heart.style.animationDuration = (Math.random()*5+3) + "s";
+    heart.style.animationDelay = Math.random()*5 + "s";
 
-pattern.forEach(row=>{
-    row.forEach(cell=>{
-        const div = document.createElement("div");
-        div.classList.add("cell");
-        if(cell === 1) div.classList.add("red");
-        grid.appendChild(div);
-    });
-});
+    document.body.appendChild(heart);
+}
 </script>
 
 </body>
