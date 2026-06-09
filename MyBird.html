@@ -2,123 +2,170 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body{
-    margin:0;
-    height:100vh;
-    background:#000;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:'Poppins', sans-serif;
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #0a0a16 0%, #000000 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    perspective: 1000px;
+}
+
+/* ===== BACKGROUND PARTICLES ===== */
+body::before, body::after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 20vw 10vh 2px rgba(255,182,193,0.5), 80vw 30vh 1px #fff, 50vw 70vh 3px rgba(255,255,0,0.4), 15vw 85vh 2px #fff, 85vw 80vh 1px rgba(255,182,193,0.3);
+    animation: floatingDust 12s linear infinite;
+    opacity: 0.6;
+}
+body::after {
+    box-shadow: 30vw 50vh 2px #fff, 70vw 15vh 3px rgba(255,255,0,0.3), 40vw 90vh 1px rgba(255,182,193,0.6), 90vw 60vh 2px #fff;
+    animation-duration: 18s;
+    animation-delay: -5s;
+}
+
+@keyframes floatingDust {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100vh) rotate(360deg); }
 }
 
 /* ===== MICKEY ===== */
-.mickey{
-    position:relative;
-    width:160px;
-    height:160px;
-    opacity:0;
-    transform:scale(0.3);
-    animation:appear 2.5s ease forwards;
+.mickey {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+    transform: scale(0.3);
+    animation: appear 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, pulse 4s ease-in-out infinite 2.5s;
 }
 
-.mickey::after{
-    content:"";
-    position:absolute;
-    inset:-30px;
-    background:radial-gradient(circle, rgba(255,255,0,0.35), transparent 60%),
-                radial-gradient(circle, rgba(255,105,180,0.35), transparent 60%);
-    filter:blur(20px);
-    opacity:0;
-    animation:glow 3s ease forwards 1.5s;
+.mickey::after {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle, rgba(255,182,193,0.4) 0%, rgba(255,255,0,0.15) 40%, transparent 70%);
+    filter: blur(15px);
+    opacity: 0;
+    animation: glow 3s ease forwards 1.2s;
+    z-index: -1;
 }
 
-.ear{
-    position:absolute;
-    width:80px;
-    height:80px;
-    background:#111;
-    border-radius:50%;
+.ear, .face {
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 5px rgba(255,255,255,0.1), 0 5px 15px rgba(0,0,0,0.6);
 }
 
-.left{ top:-35px; left:-35px; }
-.right{ top:-35px; right:-35px; }
-
-.face{
-    width:160px;
-    height:160px;
-    background:#111;
-    border-radius:50%;
+.ear {
+    position: absolute;
+    width: 75px;
+    height: 75px;
 }
 
-/* MICKEY ANIMATION */
-@keyframes appear{
-    0%{opacity:0; transform:scale(0.3);}
-    60%{opacity:1; transform:scale(1.1);}
-    100%{opacity:1; transform:scale(1);}
+.left { top: -30px; left: -30px; }
+.right { top: -30px; right: -30px; }
+
+.face {
+    width: 150px;
+    height: 150px;
+    position: relative;
 }
 
-@keyframes glow{
-    0%{opacity:0;}
-    100%{opacity:1;}
+/* MICKEY ANIMATIONS */
+@keyframes appear {
+    0% { opacity: 0; transform: scale(0.3) rotate(-15deg); }
+    70% { opacity: 1; transform: scale(1.05) rotate(5deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes glow {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); filter: drop-shadow(0 0 15px rgba(255,182,193,0.3)); }
 }
 
 /* ===== TEXT ===== */
-.text{
-    position:absolute;
-    bottom:160px; /* مرفوع شوي */
-    width:85%;
-    color:white;
-    text-align:center;
-    font-size:22px;
-    line-height:1.8;
-    opacity:0;
-    font-weight:400;
-    animation:textIn 3s ease forwards;
-    animation-delay:2.5s;
-    text-shadow:0 0 12px rgba(255,255,255,0.35);
+.text {
+    position: absolute;
+    bottom: 150px;
+    width: 85%;
+    max-width: 600px;
+    color: rgba(255,255,255,0.95);
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.8;
+    opacity: 0;
+    font-weight: 300;
+    animation: textIn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 2.2s;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-@keyframes textIn{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
+@keyframes textIn {
+    from { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 /* ===== NAME (LAST) ===== */
-.name{
-    position:absolute;
-    bottom:60px;
-    width:100%;
-    text-align:center;
-    opacity:0;
-    font-size:32px;
-    font-weight:600;
-    color:#ffb6c1;
-    text-shadow:0 0 20px #ffb6c1;
-    animation:showName 2s ease forwards;
-    animation-delay:5.8s; /* يطلع بعد النص */
+.name {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    animation: showName 2s ease forwards;
+    animation-delay: 5s;
 }
 
-@keyframes showName{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+@keyframes showName {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.name span{
-    color:#ffd1dc; /* نفس توهج ميكي الوردي */
-    text-shadow:0 0 25px #ffb6c1;
+.name span {
+    color: #ffb6c1;
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(255,182,193,0.6);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .text {
+        font-size: 17px;
+        bottom: 140px;
+        width: 90%;
+    }
+    .mickey {
+        width: 120px;
+        height: 120px;
+    }
+    .face { width: 120px; height: 120px; }
+    .ear { width: 60px; height: 60px; }
+    .left { top: -25px; left: -25px; }
+    .right { top: -25px; right: -25px; }
+    .name { font-size: 14px; bottom: 40px; }
 }
 </style>
 </head>
