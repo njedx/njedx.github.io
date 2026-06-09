@@ -2,118 +2,81 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Love You ❤️</title>
+<title>Pixel Heart</title>
+
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 body{
+    margin:0;
     height:100vh;
-    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(-45deg,#0f172a,#1e1b4b,#4c1d95,#be185d);
-    background-size:400% 400%;
-    animation:bg 12s ease infinite;
-    font-family:Arial,sans-serif;
+    background: radial-gradient(circle,#1a1a2e,#000);
+    font-family:Arial;
 }
-@keyframes bg{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+
+.grid{
+    display:grid;
+    grid-template-columns: repeat(14, 18px);
+    grid-template-rows: repeat(14, 18px);
+    gap:2px;
 }
-.heart{
-    position:relative;
-    width:220px;
-    height:220px;
-    background:linear-gradient(135deg,#ff4d6d,#ff85a2);
-    transform:rotate(-45deg);
-    animation:beat 1.2s infinite;
-    box-shadow:0 0 50px rgba(255,77,109,.8);
+
+
+.cell{
+    width:18px;
+    height:18px;
+    background:#111;
+    transition:0.3s;
 }
-.heart:before,
-.heart:after{
-    content:"";
-    position:absolute;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:inherit;
+
+.red{
+    background: linear-gradient(135deg,#ff1744,#ff8a80);
+    box-shadow:0 0 6px #ff1744;
 }
-.heart:before{
-    top:-110px;
-    left:0;
-}
-.heart:after{
-    left:110px;
-    top:0;
-}
-@keyframes beat{
-    0%,100%{
-        transform:rotate(-45deg) scale(1);
-    }
-    50%{
-        transform:rotate(-45deg) scale(1.12);
-    }
-}
+
+/* النص */
 .text{
     position:absolute;
     color:white;
-    text-align:center;
     font-weight:bold;
-    text-shadow:0 0 15px white;
-    z-index:10;
-}
-.text h1{
-    font-size:42px;
-    letter-spacing:3px;
-}
-.text p{
-    margin-top:10px;
+    text-shadow:0 0 10px #fff;
     font-size:20px;
-}
-.star{
-    position:absolute;
-    color:white;
-    animation:float linear infinite;
-}
-@keyframes float{
-    from{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-    20%{
-        opacity:1;
-    }
-    to{
-        transform:translateY(-100px);
-        opacity:0;
-    }
 }
 </style>
 </head>
+
 <body>
-<div class="text">
-    <h1>I LOVE YOU ❤️</h1>
-    <p>Forever & Always</p>
-</div>
-<div class="heart"></div>
+
+<div class="text">I LOVE YOU ❤️</div>
+
+<div class="grid" id="grid"></div>
+
 <script>
-for(let i=0;i<70;i++){
-    let star=document.createElement("div");
-    star.className="star";
-    star.innerHTML="✨";
-    star.style.left=Math.random()*100+"vw";
-    star.style.fontSize=(Math.random()*20+10)+"px";
-    star.style.animationDuration=(Math.random()*8+5)+"s";
-    star.style.animationDelay=Math.random()*5+"s";
-    document.body.appendChild(star);
-}
+const pattern = [
+ [0,1,1,0,0,0,0,0,0,1,1,0,0,0],
+ [1,1,1,1,0,0,0,0,1,1,1,1,0,0],
+ [1,1,1,1,1,0,0,1,1,1,1,1,1,0],
+ [1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+ [0,1,1,1,1,1,1,1,1,1,1,1,0,0],
+ [0,0,1,1,1,1,1,1,1,1,1,0,0,0],
+ [0,0,0,1,1,1,1,1,1,1,0,0,0,0],
+ [0,0,0,0,1,1,1,1,1,0,0,0,0,0],
+ [0,0,0,0,0,1,1,1,0,0,0,0,0,0],
+ [0,0,0,0,0,0,1,0,0,0,0,0,0,0],
+];
+
+const grid = document.getElementById("grid");
+
+pattern.forEach(row=>{
+    row.forEach(cell=>{
+        const div = document.createElement("div");
+        div.classList.add("cell");
+        if(cell === 1) div.classList.add("red");
+        grid.appendChild(div);
+    });
+});
 </script>
+
 </body>
 </html>
-``
