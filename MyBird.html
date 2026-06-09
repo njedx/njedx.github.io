@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>For You</title>
 
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -19,7 +18,7 @@ body{
     font-family:'Poppins', sans-serif;
 }
 
-
+/* ===== MICKEY ===== */
 .mickey{
     position:relative;
     width:160px;
@@ -28,7 +27,6 @@ body{
     transform:scale(0.3);
     animation:appear 2.5s ease forwards;
 }
-
 
 .mickey::after{
     content:"";
@@ -41,7 +39,6 @@ body{
     animation:glow 3s ease forwards 1.5s;
 }
 
-
 .ear{
     position:absolute;
     width:80px;
@@ -53,43 +50,29 @@ body{
 .left{ top:-35px; left:-35px; }
 .right{ top:-35px; right:-35px; }
 
-
 .face{
     width:160px;
     height:160px;
     background:#111;
     border-radius:50%;
-    position:absolute;
 }
 
-
+/* MICKEY ANIMATION */
 @keyframes appear{
-    0%{
-        opacity:0;
-        transform:scale(0.3);
-        filter:blur(10px);
-    }
-    60%{
-        opacity:1;
-        transform:scale(1.1);
-        filter:blur(0px);
-    }
-    100%{
-        opacity:1;
-        transform:scale(1);
-    }
+    0%{opacity:0; transform:scale(0.3);}
+    60%{opacity:1; transform:scale(1.1);}
+    100%{opacity:1; transform:scale(1);}
 }
-
 
 @keyframes glow{
-    0%{ opacity:0; }
-    100%{ opacity:1; }
+    0%{opacity:0;}
+    100%{opacity:1;}
 }
 
-
+/* ===== TEXT ===== */
 .text{
     position:absolute;
-    bottom:120px; /* مرتفع شوي */
+    bottom:160px; /* مرفوع شوي */
     width:85%;
     color:white;
     text-align:center;
@@ -97,38 +80,68 @@ body{
     line-height:1.8;
     opacity:0;
     font-weight:400;
-    animation:textIn 3s ease forwards 2s;
+    animation:textIn 3s ease forwards;
+    animation-delay:2.5s;
     text-shadow:0 0 12px rgba(255,255,255,0.35);
 }
 
-
 @keyframes textIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== NAME (LAST) ===== */
+.name{
+    position:absolute;
+    bottom:60px;
+    width:100%;
+    text-align:center;
+    opacity:0;
+    font-size:32px;
+    font-weight:600;
+    color:#ffb6c1;
+    text-shadow:0 0 20px #ffb6c1;
+    animation:showName 2s ease forwards;
+    animation-delay:5.8s; /* يطلع بعد النص */
+}
+
+@keyframes showName{
     from{
         opacity:0;
-        transform:translateY(30px);
+        transform:translateY(20px);
     }
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
+
+.name span{
+    color:#ffd1dc; /* نفس توهج ميكي الوردي */
+    text-shadow:0 0 25px #ffb6c1;
+}
 </style>
 </head>
 
 <body>
 
-
+<!-- MICKEY -->
 <div class="mickey">
     <div class="ear left"></div>
     <div class="ear right"></div>
     <div class="face"></div>
 </div>
 
-
+<!-- TEXT -->
 <div class="text">
 This page was built just to say: you’re truly one of a kind.<br><br>
 Thank you for being the wonderful person you are,<br>
 and I'm just really glad to have you by my side.
+</div>
+
+<!-- NAME (LAST) -->
+<div class="name">
+Made with love by <span>Njoud</span> for you 💖
 </div>
 
 </body>
